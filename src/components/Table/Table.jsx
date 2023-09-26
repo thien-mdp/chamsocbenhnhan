@@ -86,6 +86,24 @@ const Table = () => {
               </td>
               <td className="px-6 py-4 ">1/1</td>
             </tr>
+            <tr className="overflow-auto bg-white border-b max-h-20">
+              <td className="px-6 py-4 font-medium text-gray-900">2</td>
+              <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
+                Mai Đức Phong
+              </th>
+              <td className="px-6 py-4 font-medium text-gray-900">Thiên</td>
+              <td className="px-6 py-4 ">13/12/2000</td>
+              <td className="px-6 py-4 ">Đà Nẵng</td>
+              <td className="px-6 py-4 ">200008888888</td>
+              <td className="px-6 py-4 ">BHYT123J99</td>
+              <td className="px-6 py-4 ">
+                This HTML file is a template. If you open it directly in the browser, you will see an empty page. You
+                can add webfonts, meta tags, or analytics to this file. The build step will place the bundled scripts
+                into the tag. To begin the development, run `npm start` or `yarn start`. To create a production bundle,
+                use `npm run build` or `yarn build`.
+              </td>
+              <td className="px-6 py-4 ">1/1</td>
+            </tr>
           </tbody>
         </table>
       </div>
