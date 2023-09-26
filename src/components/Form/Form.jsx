@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 
-const FormInput = () => {
+const FormInput = ({ hide }) => {
   const {
     handleSubmit,
     formState: { errors },
@@ -20,11 +20,12 @@ const FormInput = () => {
   });
   const onSubmit = handleSubmit((data) => {
     console.log(data);
+    hide();
   });
   return (
     <section className="bg-white dark:bg-gray-900">
-      <div className="max-w-2xl px-4 py-8 mx-auto lg:py-16">
-        <form onSubmit={handleSubmit(onSubmit)} className="p-8 pt-4 border-2 rounded-md">
+      <div className="w-full">
+        <form onSubmit={handleSubmit(onSubmit)}>
           <h2 className="mb-8 text-xl font-bold text-center text-gray-900 capitalize ">Add a new patient</h2>
           <div className="grid md:grid-cols-2 md:gap-6">
             <div className="relative z-0 w-full mb-6 group">
