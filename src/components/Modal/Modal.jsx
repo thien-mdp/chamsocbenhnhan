@@ -2,11 +2,17 @@ import React from "react";
 import ReactDOM from "react-dom";
 import FormInput from "../Form";
 
-const Modal = ({ isShowing, hide }) =>
+const Modal = ({ isShowing, hide, setLoading, loading, edit, setEdit, dataCurrent }) =>
   isShowing
     ? ReactDOM.createPortal(
         <React.Fragment>
-          <div onClick={hide} className="fixed top-0 left-0 z-[1040] w-full h-full bg-black opacity-50" />
+          <div
+            onClick={() => {
+              hide();
+              setEdit(false);
+            }}
+            className="fixed top-0 left-0 z-[1040] w-full h-full bg-black opacity-50"
+          />
           <div
             className="fixed top-0 left-0 right-0 z-[1050] w-auto h-auto my-[10vh] mx-auto outline-0 "
             aria-modal
@@ -18,7 +24,10 @@ const Modal = ({ isShowing, hide }) =>
               <div className="flex items-center justify-end">
                 <svg
                   className="w-6 h-6 text-gray-800 rounded-full cursor-pointer dark:text-white hover:text-white hover:bg-rose-500"
-                  onClick={hide}
+                  onClick={() => {
+                    hide();
+                    setEdit(false);
+                  }}
                   aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -33,7 +42,14 @@ const Modal = ({ isShowing, hide }) =>
                   />
                 </svg>
               </div>
-              <FormInput hide={hide} />
+              <FormInput
+                hide={hide}
+                edit={edit}
+                setEdit={setEdit}
+                setLoading={setLoading}
+                loading={loading}
+                dataCurrent={dataCurrent}
+              />
             </div>
           </div>
         </React.Fragment>,

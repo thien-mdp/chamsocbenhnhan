@@ -1,11 +1,19 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Table from './components/Table';
 import Modal from './components/Modal/Modal';
 import useModal from './components/Modal/useModal';
 
 
 function App() {
+  const [loading, setLoading] = useState(false);
+  const [dataCurrent, setDataCurrent] = useState();
+  const [edit, setEdit] = useState(false);
   const { isShowing, toggle } = useModal();
+
+  useEffect(() => {
+    setDataCurrent()
+  }, [edit])
+
   return (
     <div className='my-14 mx-[8vw]'>
       <p className="my-8 text-3xl font-bold text-center">Patient List</p>
@@ -22,8 +30,14 @@ function App() {
       <Modal
         isShowing={isShowing}
         hide={toggle}
+        loading={loading}
+        setLoading={setLoading}
+        edit={edit}
+        setEdit={setEdit}
+        dataCurrent={dataCurrent}
       />
-      <Table />
+      <Table loading={loading} isShowing={isShowing}
+        hide={toggle} setEdit={setEdit} setDataCurrent={setDataCurrent} />
     </div>
   );
 }
