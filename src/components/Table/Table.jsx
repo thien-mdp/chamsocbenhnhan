@@ -25,7 +25,7 @@ const Table = ({ loading, isShowing, hide, setEdit, setDataCurrent }) => {
   React.useEffect(() => {
     const getData = async () => {
       try {
-        const colRef = collection(db, "patient");
+        const colRef = collection(db, "patients");
         let documentSnapshots;
         documentSnapshots = await getDocs(query(colRef));
         // documentSnapshots = await getDocs(query(colRef, limit(10)));
@@ -88,51 +88,59 @@ const Table = ({ loading, isShowing, hide, setEdit, setDataCurrent }) => {
         <table className="w-full text-sm text-left text-gray-500 ">
           <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 ">
             <tr className="uppercase">
-              <th scope="col" className="px-6 py-3 max-w-[50px]">
+              <th scope="col" className="px-4 py-3 max-w-[50px]">
                 STT
               </th>
-              <th scope="col" className="px-6 py-3">
+              <th scope="col" className="px-4 py-3">
                 Họ lót
               </th>
-              <th scope="col" className="px-6 py-3">
+              <th scope="col" className="px-4 py-3">
                 Tên
               </th>
-              <th scope="col" className="px-6 py-3 min-w-[140px]">
+              <th scope="col" className="px-4 py-3 min-w-[120px]">
                 Ngày sinh
               </th>
-              <th scope="col" className="px-6 py-3 min-w-[140px]">
-                Địa chỉ
-              </th>
-              <th scope="col" className="px-6 py-3">
+              <th scope="col" className="px-4 py-3">
                 Số CCCD
               </th>
-              <th scope="col" className="px-6 py-3">
-                Số BHYT
+              <th scope="col" className="px-4 py-3 min-w-[140px]">
+                Địa chỉ
               </th>
-              <th scope="col" className="px-6 py-3">
-                Chuẩn đoán
+              <th scope="col" className="px-4 py-3 min-w-[115px]">
+                Số phòng
               </th>
-              <th scope="col" className="px-6 py-3 min-w-[145px]">
+              <th scope="col" className="px-4 py-3 min-w-[205px]">
+                Chẩn đoán
+              </th>
+              <th scope="col" className="px-4 py-3 min-w-[145px]">
                 Ngày vào viện
               </th>
-              <th scope="col" className="px-6 py-3 min-w-[50px]"></th>
+              <th scope="col" className="px-4 py-3 min-w-[125px]">
+                Trạng thái
+              </th>
+              <th scope="col" className="px-2 py-3 min-w-[50px]"></th>
             </tr>
           </thead>
           <tbody>
             {currentData.map((item, index) => (
               <tr key={item.id} className="overflow-auto bg-white border-b max-h-20">
-                <td className="px-6 py-4 font-medium text-gray-900">{index + 1 + indexOfFirstItem}</td>
-                <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                <td className="px-4 py-4 font-medium text-gray-900">{index + 1 + indexOfFirstItem}</td>
+                <th scope="row" className="px-4 py-4 font-medium text-gray-900 whitespace-nowrap">
                   {item.firstName}
                 </th>
-                <td className="px-6 py-4 font-medium text-gray-900">{item.lastName}</td>
-                <td className="px-6 py-4 ">{moment(item.birthday).format("DD/MM/YYYY")}</td>
-                <td className="px-6 py-4 ">{item.address}</td>
-                <td className="px-6 py-4 ">{item.cccd}</td>
-                <td className="px-6 py-4 ">{item.BHYT}</td>
-                <td className="px-6 py-4 ">{item.chuandoan}</td>
-                <td className="px-6 py-4 ">{moment(item.ngaynhapvien).format("DD/MM/YYYY")}</td>
-                <td className="px-6 py-4 text-blue-500" onClick={() => handleUpdateClick(item)}>
+                <td className="px-4 py-4 font-medium text-gray-900">{item.lastName}</td>
+                <td className="px-4 py-4 ">{moment(item.birthday).format("DD/MM/YYYY")}</td>
+                <td className="px-4 py-4 ">{item.cccd}</td>
+                <td className="px-4 py-4 ">{item.address}</td>
+                <td className="px-4 py-4 ">{item.roomID}</td>
+                <td className="px-4 py-4 ">{item.chuandoan}</td>
+                <td className="px-4 py-4 ">{moment(item.ngaynhapvien).format("DD/MM/YYYY")}</td>
+                <td
+                  className={`${item.status ? "text-green-500" : "text-gray-500 text-center"} px-4 py-4 font-semibold`}
+                >
+                  {item.status ? "Đã cấp thuốc" : "-"}
+                </td>
+                <td className="px-2 py-4 text-blue-500 min-w-[80px]" onClick={() => handleUpdateClick(item)}>
                   Chi tiết
                 </td>
               </tr>
@@ -145,7 +153,7 @@ const Table = ({ loading, isShowing, hide, setEdit, setDataCurrent }) => {
             disabled={currentPage === 1}
             className={`${
               currentPage === 1 ? "bg-blue-800" : "bg-blue-500"
-            } px-2 py-1 mr-2 text-sm text-white bg-blue-500 rounded-md`}
+            } px-4 py-1 mr-2 text-sm text-white bg-blue-500 rounded-md`}
           >
             Previous
           </button>
@@ -154,7 +162,7 @@ const Table = ({ loading, isShowing, hide, setEdit, setDataCurrent }) => {
             disabled={indexOfLastItem >= data.length}
             className={`${
               indexOfLastItem >= data.length ? "bg-blue-800" : "bg-blue-500"
-            } px-2 py-1 mr-2 text-sm text-white bg-blue-500 rounded-md`}
+            } px-4 py-1 mr-2 text-sm text-white bg-blue-500 rounded-md`}
           >
             Next
           </button>

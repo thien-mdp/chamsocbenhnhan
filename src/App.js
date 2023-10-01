@@ -15,7 +15,7 @@ function App() {
   }, [edit])
 
   return (
-    <div className='my-14 mx-[8vw]'>
+    <div className='my-14 mx-[6vw]'>
       <p className="my-8 text-3xl font-bold text-center">Patient List</p>
       <div className='text-end'>
         <button
